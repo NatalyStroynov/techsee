@@ -1,0 +1,21 @@
+<h3>Search Bugs</h3>
+<div class="form_search">
+<label for="search">Tester Name</label>
+<input 
+    [(ngModel)]="testerName"  
+    #search="ngModel" 
+    type="text" 
+    name="testerName" 
+    minlength="2" 
+    maxlength="12" 
+    placeholder="Enter the tester name"
+    required>
+<button (click)="getTester(testerSearch.value)" [disabled]="!search.valid">Fetch</button>
+<p>Temporary error occurred, please try again later</p>
+</div>
+
+<div *ngFor="let tester of testers">
+  <span>{{tester.firstName}}</span>
+</div>
+
+
