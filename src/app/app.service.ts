@@ -32,7 +32,8 @@ export class AppService {
     console.log("app servers getAllTesters");
     return this.http.get<Tester[]>(this.testersUrl+"all")
     .pipe(
-      tap(data => console.log('fetched testers', data))
+      tap(data => console.log('fetched testers', data),
+      catchError(this.handleError('getTesters', [])))
     );
    
   }
@@ -41,7 +42,8 @@ export class AppService {
     console.log("app servers getlTesters");
     return this.http.get<Tester>(this.testersUrl+testerName)
     .pipe(
-      tap(data => console.log('fetched tester', data))
+      tap(data => console.log('fetched tester', testerName),
+      catchError(this.handleError('getTester', [])))
     );
    
   }

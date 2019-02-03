@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class TestersComponent implements OnInit {
   testers:Tester[];
   testerName:string;
+  isError:boolean=false;
 
   constructor(
     private httpService:AppService
@@ -20,12 +21,16 @@ export class TestersComponent implements OnInit {
   ngOnInit() {
     console.log("testers component onInit");   
     this.httpService.getAllTesters().subscribe(data => this.testers=data);
-
-    
+       
   }
 
   getTester(name:string){
-    //this.httpService.getTester(name).subscribe(data => this.testers=[data]);
+    if(name==="all"){
+      this.httpService.getAllTesters().subscribe(data => this.testers=data);
+    }else{
+      this.httpService.getTester(name).subscribe(data => this.testers=[data]);
+    }
+    
   }
   
 

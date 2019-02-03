@@ -1,21 +1,48 @@
-<h3>Search Bugs</h3>
-<div class="form_search">
-<label for="search">Tester Name</label>
-<input 
-    [(ngModel)]="testerName"  
-    #search="ngModel" 
-    type="text" 
-    name="testerName" 
-    minlength="2" 
-    maxlength="12" 
-    placeholder="Enter the tester name"
-    required>
-<button (click)="getTester(testerSearch.value)" [disabled]="!search.valid">Fetch</button>
-<p>Temporary error occurred, please try again later</p>
-</div>
 
-<div *ngFor="let tester of testers">
-  <span>{{tester.firstName}}</span>
-</div>
+<div class="container">
+    <div class="form-group py-5 text-center">
+      <h2>Search Bugs</h2>
+      <div class="row">
+      <div class="form_search col-md-12">
+        <form class="">
+          <label for="testerName  col-md-4">Tester Name</label>
+        <input  class="form-control-inline col-md-4"
+            [(ngModel)]="testerName"  
+            #search="ngModel" 
+            type="text" 
+            name="testerName" 
+            minlength="2" 
+            maxlength="12" 
+            placeholder="Enter the tester name"
+            required>
+            
+            <button class="btn btn-primary btn-sm btn-inline" (click)="getTester(search.value)" [disabled]="!search.valid">Fetch</button>
+            <p *ngIf="isError">Temporary error occurred, please try again later</p>
+        </form>
+      </div>
+      </div>
+      <hr class="mb-4">
+      <div class="row">
+      <table class="mdbTable table">
+      <thead>
+      <tr><th> First Name</th><th> Last Name</th> <th> Country</th> <th>Device </th><th> Bugs</th></tr>
+     </thead>
+     <tbody>
+      <tr class="mdbTableCol" *ngFor="let tester of testers">
+        <td>{{tester.firstName}}</td>
+        <td>{{tester.lastName}}</td>
+        <td>{{tester.country}}</td>
+        <td>{{tester.device}}</td>
+        <td>
+        <span *ngFor="let bug of tester.bugs">
+          {{bug.title}},
+        </span>
+        </td>
+      </tr>
+    </tbody>
+      </table>
+      </div>
+    </div>
+</div> 
 
 
